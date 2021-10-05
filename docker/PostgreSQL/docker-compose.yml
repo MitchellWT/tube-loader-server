@@ -1,0 +1,14 @@
+version: '3.1'
+
+services:
+    db:
+        container_name: tube-loader-postgresql
+        image: postgres:latest
+        restart: always
+        ports:
+          - 5432:5432
+        environment:
+            POSTGRES_USER: tube-loader-user
+            POSTGRES_PASSWORD: SecurePassword
+            POSTGRES_DB: tube-loader-db
+
