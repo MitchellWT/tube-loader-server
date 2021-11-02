@@ -30,10 +30,14 @@ class VideoController extends Controller
         return response()->json($videos);
     }
 
-    //public function update(Request $request) 
-    //{
-    //    
-    //}
+    public function toggleQueued(Request $request) 
+    {
+        $video = Video::find($this->validateId($request)['id']);
+        $video->queued = !($video->queued);
+        $video->save();
+
+        return response()->noContent(Response::HTTP_OK);
+    }
 
     public function destroy(Request $request) 
     {
@@ -46,6 +50,7 @@ class VideoController extends Controller
             'video_id' => 'required|string',
             'title' => 'required|string',
             'thumbnail' => 'required|string|url',
+            'queued' => 'required|boolean'
         ]);
     }
 
